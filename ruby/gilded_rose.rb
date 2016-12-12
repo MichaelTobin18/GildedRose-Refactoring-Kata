@@ -32,6 +32,12 @@ class GildedRose
   end
 end
 
+def checkQualityAmount(item)
+  if item.quality > 50
+    item.quality = 50
+  end
+end
+
 def decreaseSellIn(item, amount)
   if item.sell_in
     item.sell_in += amount
@@ -55,11 +61,6 @@ def updateBackstagePasses(item)
   end
 end
 
-def checkQualityAmount(item)
-  if item.quality > 50
-    item.quality = 50
-  end
-end
 
 def updateItemQuality(item, quality)
   if item.quality > 0 && item.quality < 50
@@ -74,12 +75,8 @@ end
 def updateAgedBrie(item)
   if item.quality > 0 && item.quality < 50
     if item.sell_in < 0
-      puts item.name
-      puts item.quality
       item.quality += 2
     else
-      puts item.name
-      puts item.quality
       item.quality += 1
     end
   end
