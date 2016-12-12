@@ -54,17 +54,17 @@ class GildedRose
         when RAG
           puts 'No Change to the Mighty Ragnaros Boon'
         when BACKSTAGE_PASS
-          updateItemQuality(item, 1)
           decreaseSellIn(item, -1)
+          updateItemQuality(item, 1)
         when AGEDBRIE
+          decreaseSellIn(item, -1)
           updateItemQuality(item, 1)
-          decreaseSellIn(item, -1)
         when CONJURED
+          decreaseSellIn(item, -1)
           updateItemQuality(item, -2)
-          decreaseSellIn(item, -1)
         else
-          updateItemQuality(item, -1)
           decreaseSellIn(item, -1)
+          updateItemQuality(item, -1)
       end
     end
   end
@@ -77,8 +77,12 @@ def decreaseSellIn(item, amount)
 end
 
 def updateItemQuality(item, quality)
-  if item.quality > 0 && item.quality < 50
-    item.quality += quality
+  if item.quality > 0 && item.quality <= 50
+    if item.sell_in < 0
+      item.quality += (quality*2)
+    else
+      item.quality += quality
+    end
   end
 end
 
